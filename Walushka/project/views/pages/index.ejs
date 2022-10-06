@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacts</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+    <section class="add">
+        <form action="/add" method="POST">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Name">
+            <label for="surname">Surname</label>
+            <input type="text" id="surname" name="surname" placeholder="surname">
+            <label for="phone_no">Phone_no</label>
+            <input type="number" id="phone_no" name="phone_no" placeholder="phone_no">
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email" placeholder="email">
+            <input type="submit">
+        </form>
+    </section>
+    <br>
+    <br>
+    <hr>
+<section class="show">
+ <table class="table">
+ <tr>
+ <th>Name</th>
+ <th>Surname</th>
+ <th>phone_no</th>
+ <th>email</th>
+ </tr>
+<% contacts.forEach(function(contact){ %>
+<tr> 
+ <td> <h4><%= contact.name %></h4> </td>    
+ <td> <h4><%= contact.surname %></h4> </td>   
+ <td><h5><%=contact.phone_no%></h5></td>
+ <td> <h4><%= contact.email %></h4> </td>   
+ <td><a class="btn btn-warning" href="/<%=contact._id%>/edit">EDIT </a></td>
+ <td><form action="/<%=contact._id%>/?_method=DELETE" method="POST"><button class="btn btn-danger">Delete</button></form></td>
+</tr>
+<% }) %>
+</table>
+</section>
+<h1>Edit <%=contact.name%></h1>
+<form action="/<%=contact._id%>/edit?_method=PUT" method="POST">
+    <label for="name">Name</label>
+    <input type="text" id="name" name="contact[name]" value="<%=contact.name%>">
+    <label for="surnmae">surnmae</label>
+    <input type="text" id="surname" name="contact[surname]" value="<%=contact.surnmae%>">
+    <label for="phone_no">Phone_no</label>
+    <input type="number" id="phone_no" name="contact[phone_no]" value="<%=contact.phone_no%>">
+    <label for="email">Email</label>
+    <input type="text" id="email" name="contact[email]" value="<%=contact.email%>">
+    <input type="submit">
+</form>
+<a href="/">GOBACK-></a>
+</body>
+</html>
